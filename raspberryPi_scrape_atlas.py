@@ -1,5 +1,5 @@
 """A quick script to pull ATLAS allsky camera images from http://dashboard.fallingstar.com/dash/sth.html 
-and note the reported cloud cover. Ran on a raspberry Pi everyday at 16:00 (UCT+2) to obtain a small 
+and note the reported cloud cover. Ran as a crontab job on a raspberry Pi everyday at 16:00 (UCT+2) to obtain a small 
 dataset of allsky images at the time of Lesedi's Preflight."""
 
 import requests
