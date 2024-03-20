@@ -5,7 +5,7 @@ dataset of allsky images at the time of Lesedi's Preflight."""
 import requests
 import datetime
 import os
-import check_weather
+import check_reported_weather
 
 ATLAS_STH_ALLSKY_URL = "https://www.fallingstar.com/weather/sth/latest_clr400.jpg"
 
@@ -19,7 +19,7 @@ def download_allsky_image(url):
             os.makedirs("allsky_images", exist_ok=True)
             save_path = os.path.join(
                 "allsky_images",
-                "{}.jpg".format(check_weather.get_predicted_cloud_cover()),
+                "{}.jpg".format(check_reported_weather.get_predicted_cloud_cover()),
             )
             with open(save_path, "wb") as f:
                 f.write(response.content)
