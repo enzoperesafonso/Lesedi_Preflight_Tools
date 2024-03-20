@@ -10,6 +10,8 @@ def parse_iso_time(iso_time):
 def get_predicted_cloud_cover():
     """Access the Norwegian Meteorological Institute Weather to obtain the total current cloud cover percentage over Sutherland Observatory.
 
+    The API used here is the same one used for the Sutherland Observatory Weather Reporting Page hosted at https://suthweather.saao.ac.za .
+
     :return: Time of request and area of sky obscured by cloud as a percentage value.
     :rtype: String.
     :raises ValueError: Prediction Error.
