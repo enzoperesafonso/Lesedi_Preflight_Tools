@@ -20,7 +20,7 @@ def get_predicted_cloud_cover():
 
     # TODO: Ask Dr Erasmus for SAAO email to be associated with meteo api...
     headers = {
-        "User-Agent": "https://github.com/enzoperesafonso/LESEDI_CLOUD_CONDITION"
+        "User-Agent": "https://github.com/enzoperesafonso/lesedi_preflight_tools"
     }
     try:
         response = requests.get(api_url, headers=headers)
