@@ -5,7 +5,7 @@ dataset of allsky images at the time of Lesedi's Preflight."""
 import requests
 import datetime
 import os
-import check_reported_weather
+import rPi_tester_code.check_reported_weather as check_reported_weather
 
 ATLAS_STH_ALLSKY_URL = "https://www.fallingstar.com/weather/sth/latest_clr400.jpg"
 
