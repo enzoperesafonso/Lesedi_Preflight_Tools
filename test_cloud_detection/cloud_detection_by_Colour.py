@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # Load the image
-image = cv2.imread('test_images/Cloud cover at 2024-03-21 16:00:01.828674: 1.6%.jpg')
+image = cv2.imread('test_images/Cloud cover at 2024-03-23 16:00:02.118393: 100.0%.jpg')
 
 # Convert the image to the HSV color space
 hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)

@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # Load the image
 
 ## THIS WORKS WELL
-image = cv2.imread('test_images/Cloud cover at 2024-03-21 16:00:01.828674: 1.6%.jpg')
+image = cv2.imread('test_images/Cloud cover at 2024-03-24 16:00:01.975691: 18.0%.jpg')
 
 # Convert the image to the HSV color space
 hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
