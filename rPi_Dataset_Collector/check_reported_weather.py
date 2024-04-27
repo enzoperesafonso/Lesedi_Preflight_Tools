@@ -1,7 +1,10 @@
 import requests
 from datetime import datetime
 
+
+STH_METEO_API_URL = "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=-32.37998&lon=20.81058"
 current_time = datetime.now()
+
 
 def parse_iso_time(iso_time):
     return datetime.strptime(iso_time, "%Y-%m-%dT%H:%M:%SZ")
@@ -16,14 +19,14 @@ def get_predicted_cloud_cover():
     :rtype: String.
     :raises ValueError: Prediction Error.
     """
-    api_url = "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=-32.37998&lon=20.81058"
 
+    # Meteo requires a link to a project OR an associated email given as a User-Agent in request header when accessing API
     # TODO: SAAO to be associated with meteo api? ...
     headers = {
         "User-Agent": "https://github.com/enzoperesafonso/lesedi_preflight_tools"
     }
     try:
-        response = requests.get(api_url, headers=headers)
+        response = requests.get(STH_METEO_API_URL, headers=headers)
         weather_data = response.json()
 
         closest_entry = min(

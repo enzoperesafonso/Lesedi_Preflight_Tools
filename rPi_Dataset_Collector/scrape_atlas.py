@@ -11,7 +11,6 @@ ATLAS_STH_ALLSKY_URL = "https://www.fallingstar.com/weather/sth/latest_clr400.jp
 
 current_date_and_time = datetime.datetime.now()
 
-
 def download_allsky_image(url):
     try:
         response = requests.get(url)
@@ -28,6 +27,5 @@ def download_allsky_image(url):
             print("Failed to download image: Status code", response.status_code)
     except Exception as e:
         print("Error occurred while downloading image:", str(e))
-
 
 download_allsky_image(ATLAS_STH_ALLSKY_URL)
