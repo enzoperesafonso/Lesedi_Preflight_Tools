@@ -1,7 +1,12 @@
-"""A quick script to pull ATLAS allsky camera images from http://dashboard.fallingstar.com/dash/sth.html
+#!/usr/bin/env python3
+""" 
+@Author Enzo Peres Afonso 
+
+A quick script to pull ATLAS allsky camera images from http://dashboard.fallingstar.com/dash/sth.html
 and note the reported cloud cover. Ran as a crontab job on a raspberry Pi everyday at 16:00 (UCT+2) to obtain a small
 dataset of allsky images at the time of Lesedi's Preflight. Images are saved into directories based on the percentage cloud 
-cover reported at the time of scraping. Files are saved with the current local civil time and the reported cloud cover in parenthesis"""
+cover reported at the time of scraping. Files are saved with the current local civil time and the reported cloud cover in parenthesis
+"""
 
 import requests
 import datetime
