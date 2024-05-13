@@ -1,2 +1,15 @@
 Astropy Implimentation of Observing Constraints  -   https://astroplan.readthedocs.io/en/latest/tutorials/constraints.html
 Scheduler Features in Astroplam - https://astroplan.readthedocs.io/en/latest/tutorials/scheduling.html
+
+
+Trainable machine learning simplified: https://teachablemachine.withgoogle.com/train/image
+
+
+
+
+
+Q: I see that the OCS requires an exposure time... must I work  and how do I it out from the reported visual magnitude 
+
+Q: Would you like the list to be parameterised... i.e user specifies max number of possible reference targets in one night?
+
+Q: Need some serious help understanding the OCS requests...
