@@ -10,23 +10,28 @@ current_date_and_time = datetime.datetime.now()
 try:
     response = requests.get(ATLAS_STH_ALLSKY_URL)
     if response.status_code == 200:
-        with open('machine_learning_cloud_cover/latest.jpg', "wb") as f:
+        with open("machine_learning_cloud_cover/latest.jpg", "wb") as f:
             f.write(response.content)
         print("{} Image downloaded successfully".format(current_date_and_time))
     else:
         print("Failed to download image: Status code", response.status_code)
 except Exception as e:
     print("Error occurred while downloading image:", str(e))
-    
-    
+
+
 # Disable scientific notation for clarity
 np.set_printoptions(suppress=True)
 
 # Load the model
-model = load_model("/Users/enzo/lesedi_preflight/machine_learning_cloud_cover/keras_model.h5", compile=False)
+model = load_model(
+    "/Users/enzo/lesedi_preflight/machine_learning_cloud_cover/keras_model.h5",
+    compile=False,
+)
 
 # Load the labels
-class_names = open("/Users/enzo/lesedi_preflight/machine_learning_cloud_cover/labels.txt", "r").readlines()
+class_names = open(
+    "/Users/enzo/lesedi_preflight/machine_learning_cloud_cover/labels.txt", "r"
+).readlines()
 
 # Create the array of the right shape to feed into the keras model
 # The 'length' or number of images you can put into the array is
@@ -59,3 +64,8 @@ confidence_score = prediction[0][index]
 print(prediction)
 print("Class:", class_name[2:], end="")
 print("Confidence Score:", confidence_score)
+
+""" Had the same issue. The problem is the code that teachable machine gives (for .h5) is for older version of tensorflow. 
+As Ajonn mentioned, downgrading it to an older version (2.12 for example) solves the issue. 
+Also make sure that you are working with ( Python 3.8–3.11). 
+It’s not supported for older or newer versions. """
