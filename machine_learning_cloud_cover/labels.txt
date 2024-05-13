@@ -1,0 +1,2 @@
+0 Clear Sky
+1 Cloudy Sky
