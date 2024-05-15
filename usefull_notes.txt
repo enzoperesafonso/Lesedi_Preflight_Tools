@@ -6,10 +6,27 @@ Trainable machine learning simplified: https://teachablemachine.withgoogle.com/t
 
 
 
-
-
 Q: I see that the OCS requires an exposure time... must I work  and how do I it out from the reported visual magnitude 
 
 Q: Would you like the list to be parameterised... i.e user specifies max number of possible reference targets in one night?
 
 Q: Need some serious help understanding the OCS requests...
+
+
+
+  *** Include PLots 
+  - Tracks 
+  - Sky with confidence 
+
+
+
+Exposure Time - Mag diff 
+
+
+EXPOSURE TIME: High SNR without saturation. 
+
+Update Constraints ... 
+
+Request Name ---->  STD_NAME_OF_STAR_NARROW
+
+Target Name ---->  Name of star 
