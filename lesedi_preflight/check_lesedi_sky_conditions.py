@@ -30,10 +30,10 @@ def download_atlas_allsky_image(url=ATLAS_STH_ALLSKY_URL):
             allsky_img = Image.open(BytesIO(response.content))
             return allsky_img
         else:
-            print("CSC - Failed to download image: Status code", response.status_code)
+            print("CLSC - Failed to download image: Status code", response.status_code)
             return None
     except Exception as e:
-        print("CSC - Error occurred while downloading image:", str(e))
+        print("CLSC - Error occurred while downloading image:", str(e))
         return None
 
 
@@ -73,7 +73,7 @@ def is_image_recent(allsky_img):
             return False
 
     except Exception as e:
-        print("CSC - Error occurred while checking if image is stale:", str(e))
+        print("CLSC - Error occurred while checking if image is stale:", str(e))
         return False
 
 
@@ -119,7 +119,7 @@ def classify_sky_conditions(allsky_img):
         return predicted_class[2:], confidence_score
 
     except Exception as e:
-        print("CSC - Error occurred while ML model classified image:", str(e))
+        print("CLSC - Error occurred while ML model classified image:", str(e))
         return None
 
 
@@ -146,7 +146,7 @@ def annotate_and_save_sky_image(
         draw = ImageDraw.Draw(allsky_img)
 
         # Get the current Modified Julian Date (MJD)
-        mjd = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        mjd = Time.now().mjd
 
         # Compose the text to be annotated
         text = (
@@ -163,9 +163,51 @@ def annotate_and_save_sky_image(
         allsky_img.save(output_path, quality=100)
         print(f"Annotated image saved to {output_path}")
 
-        
-
     except Exception as e:
         # Handle exceptions and print an error message
-        print(f"CSC - Error occurred while annotating and saving the allsky image: {str(e)}")
-       
+        print(
+            f"CLSC - Error occurred while annotating and saving the allsky image: {str(e)}"
+        )
+
+
+def get_current_sky_conditions(save_and_annotate=True):
+    """
+    Check the sky conditions above Lesedi by downloading, checking recency and classifying the ATLAS allsky camera image using a pretrained ML algorithm.
+
+    Parameters:
+        save_and_annotate (bool): Whether to save and annotate the allsky image. Default is True.
+
+    Returns:
+        tuple or None: A tuple containing the predicted sky condition, and confidence score.
+                       If any step fails, returns None.
+    """
+    try:
+        # Step 1: Download the image
+        allsky_img = download_atlas_allsky_image()
+        if allsky_img is None:
+            return None
+
+        # Step 2: Check if the image is recent
+        if not is_image_recent(allsky_img):
+            return None
+
+        # Step 3: Classify the sky conditions
+        classification_result = classify_sky_conditions(allsky_img)
+        if classification_result is None:
+            return None
+
+        predicted_class, confidence_score = classification_result
+
+        if save_and_annotate:
+            # Step 4: Annotate and save the image
+            annotate_and_save_sky_image(allsky_img, predicted_class, confidence_score)
+
+            # Return the results including the image path
+            return predicted_class, confidence_score
+        else:
+            # Return the results without saving the image
+            return predicted_class, confidence_score
+
+    except Exception as e:
+        print(f"CLSC - An error occurred in the processing pipeline: {str(e)}")
+        return None
