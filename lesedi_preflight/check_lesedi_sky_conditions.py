@@ -1,3 +1,35 @@
+"""
+This module automates the process of downloading, analyzing, and classifying the latest AllSky image from the ATLAS Sutherland sites weather page. 
+The primary functions include downloading the image, checking its recency, classifying sky conditions using a pre-trained machine learning model, 
+and optionally annotating and saving the image with classification results.
+
+Key Functions:
+1. download_atlas_allsky_image: Downloads the latest AllSky image from the specified URL.
+2. is_image_recent: Verifies the recency of the image based on OCR of the Modified Julian Date (MJD) information.
+3. classify_sky_conditions: Classifies the sky conditions of the image using a pre-trained ML model.
+4. annotate_and_save_sky_image: Annotates the image with classification results and saves it.
+5. get_current_sky_conditions: Orchestrates the entire process, from downloading to classifying and saving the image with results annotated.
+
+Dependencies:
+- requests: For HTTP requests to download the image.
+- datetime: For managing date and time operations.
+- PIL (Pillow): For image processing.
+- BytesIO: For handling byte streams.
+- keras: For loading the pre-trained ML model.
+- pytesseract: For OCR to extract MJD from the image.
+- astropy: For astronomical time calculations.
+- numpy: For numerical operations.
+
+Constants:
+- ATLAS_STH_ALLSKY_URL: URL of the latest AllSky image from the ATLAS Sutherland site's Weather Page.
+
+Usage:
+- Update the paths to the ML model and labels file if necessary.
+- Call get_current_sky_conditions() to get the latest sky conditions.
+
+Author: Enzo Peres Afonso 
+"""
+
 import requests
 import datetime
 from PIL import Image, ImageOps, ImageDraw
