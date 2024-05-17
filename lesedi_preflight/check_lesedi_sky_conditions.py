@@ -41,6 +41,12 @@ from astropy import units as u
 import numpy as np
 
 ATLAS_STH_ALLSKY_URL = "https://www.fallingstar.com/weather/sth/latest_clr400.jpg"
+PATH_CLASSIFIER_MODEL = (
+    "/Users/enzo/lesedi_preflight/machine_learning_cloud_cover/keras_model.h5"
+)
+PATH_CLASSIFIER_LABELS = (
+    "/Users/enzo/lesedi_preflight/machine_learning_cloud_cover/labels.txt"
+)
 
 current_date_and_time = datetime.datetime.now()
 
@@ -71,7 +77,7 @@ def download_atlas_allsky_image(url=ATLAS_STH_ALLSKY_URL):
 
 def is_image_recent(allsky_img):
     """
-    Check if the given image is recent based on the MJD extracted from the allsky image.
+    Check if the given image is recent based on the MJD extracted from the allsky image using OCR.
 
     Parameters:
         allsky_img (PIL.Image): The input image containing the MJD information.
@@ -87,7 +93,7 @@ def is_image_recent(allsky_img):
 
         # Crop the bottom left corner of the image to extract MJD information
         bottom_left = allsky_img.crop(
-            (0, allsky_img_height - 30, 250, allsky_img_height)
+            (0, allsky_img_height - 30, 240, allsky_img_height)
         )
 
         ocr_text = pytesseract.image_to_string(bottom_left)
@@ -123,14 +129,12 @@ def classify_sky_conditions(allsky_img):
     try:
         # Load the pre-trained classifier model
         classifier_model = load_model(
-            "/Users/enzo/lesedi_preflight/machine_learning_cloud_cover/keras_model.h5",
+            PATH_CLASSIFIER_MODEL,
             compile=False,
         )
 
         # Load class names
-        with open(
-            "/Users/enzo/lesedi_preflight/machine_learning_cloud_cover/labels.txt", "r"
-        ) as f:
+        with open(PATH_CLASSIFIER_LABELS, "r") as f:
             class_names = [line.strip() for line in f.readlines()]
 
         # Prepare image for classification
@@ -183,7 +187,7 @@ def annotate_and_save_sky_image(
         # Compose the text to be annotated
         text = (
             f"LESEDI AUTOMATED PREFLIGHT\n"
-            f"MJD: {mjd}\n"
+            f"MJD: {mjd:.5f}\n"
             f"Predicted: {predicted_class}\n"
             f"Confidence Score: {confidence_score:.2f}"
         )
@@ -193,7 +197,6 @@ def annotate_and_save_sky_image(
 
         # Save the annotated image
         allsky_img.save(output_path, quality=100)
-        print(f"Annotated image saved to {output_path}")
 
     except Exception as e:
         # Handle exceptions and print an error message

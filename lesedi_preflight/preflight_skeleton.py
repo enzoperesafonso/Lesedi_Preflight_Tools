@@ -1,3 +1,3 @@
 from check_lesedi_sky_conditions import get_current_sky_conditions
 
-print(get_current_sky_conditions(False))
+print(get_current_sky_conditions())
