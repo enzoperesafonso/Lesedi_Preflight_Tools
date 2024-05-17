@@ -5,7 +5,7 @@ and optionally annotating and saving the image with classification results.
 
 Key Functions:
 1. download_atlas_allsky_image: Downloads the latest AllSky image from the specified URL.
-2. is_image_recent: Verifies the recency of the image based on OCR of the Modified Julian Date (MJD) information.
+2. is_image_recent: Verifies the recency of the image based on OCR of the Modified Julian Date (MJD) information in the image.
 3. classify_sky_conditions: Classifies the sky conditions of the image using a pre-trained ML model.
 4. annotate_and_save_sky_image: Annotates the image with classification results and saves it.
 5. get_current_sky_conditions: Orchestrates the entire process, from downloading to classifying and saving the image with results annotated.
