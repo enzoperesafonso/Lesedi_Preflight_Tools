@@ -1,5 +1,6 @@
 from check_lesedi_sky_conditions import get_current_sky_conditions
 
+# Test
 current_sky_condition, prediction_confidence = get_current_sky_conditions()
 
 if current_sky_condition == 'Cloudy Sky':
